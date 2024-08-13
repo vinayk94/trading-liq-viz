@@ -1,11 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { LineChart, Line, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
-import { Slider, Card, CardHeader, CardContent, Button, InfoPopover  } from './components/ui/card';
-//import InfoPopover from './components/ui/card';
-import { HelpCircle } from 'lucide-react';
-//import InfoPopover from './components/ui/infopopover';  // Import the InfoPopover component
-
-
+import { Slider, Card, CardHeader, CardContent, Button, InfoPopover } from './components/ui/card';
 
 const PowerMarketSimulation = () => {
   const [data, setData] = useState([]);
@@ -15,13 +10,9 @@ const PowerMarketSimulation = () => {
   const [marketMetrics, setMarketMetrics] = useState({});
   const [showComparison, setShowComparison] = useState(false);
 
-  const [renderFlag, setRenderFlag] = useState(false);
-
   useEffect(() => {
     generateSimulationData();
-    setRenderFlag((prev) => !prev);  // Toggle the flag to force re-render
   }, [financialTradingLevel, renewablePenetration, demandVolatility, showComparison]);
-  
 
   const generateSimulationData = () => {
     const periods = 100;
@@ -49,7 +40,6 @@ const PowerMarketSimulation = () => {
 
       // Bid-ask spread (proxy for liquidity)
       const spread = Math.max(0.1, 1 + (Math.random() * 2 - (financialTradingLevel / 25)));
-
 
       // Price discovery speed
       priceDiscoverySpeed += Math.abs(price - supplyDemandPrice);
@@ -83,7 +73,7 @@ const PowerMarketSimulation = () => {
 
     // Calculate market metrics
     const avgVolume = totalVolume / periods;
-    const priceEfficiency = 100 - (priceDiscoverySpeed / periods);
+    const priceEfficiency = 100 - (priceDiscoverySpeed / periods / basePrice * 100);
     const marketVolatility = Math.sqrt(volatility / periods);
     const liquidity = avgVolume / marketVolatility;
 
@@ -140,12 +130,12 @@ const PowerMarketSimulation = () => {
   };
 
   const getEfficiencyDescription = (efficiency) => {
+    efficiency = parseFloat(efficiency);
     if (efficiency > 95) return "highly efficient";
     if (efficiency > 80) return "efficient";
     if (efficiency > 60) return "moderately efficient";
     return "inefficient";
   };
-  console.log("Calculated Efficiency: ", marketMetrics.priceEfficiency);
 
   return (
     <Card className="w-full max-w-6xl mx-auto p-6 bg-gradient-to-br from-blue-50 to-green-50">
@@ -268,7 +258,7 @@ const PowerMarketSimulation = () => {
         <div className="mt-8 p-6 bg-blue-50 rounded-lg shadow-md">
           <h3 className="text-xl font-semibold mb-4 text-blue-800">Key Takeaways</h3>
           <p className="text-sm text-gray-700 leading-relaxed">
-            With {financialTradingLevel}% financial trading, the market is {getEfficiencyDescription(parseFloat(marketMetrics.priceEfficiency))}, 
+            With {financialTradingLevel}% financial trading, the market is {getEfficiencyDescription(marketMetrics.priceEfficiency)}, 
             liquidity is {parseFloat(marketMetrics.liquidity) > 50 ? "strong" : "weak"}, and 
             price volatility is {parseFloat(marketMetrics.marketVolatility) < 10 ? "low" : "high"}.
             {showComparison && " Compare this with the low and high trading scenarios to see the impact of financial products."}
