@@ -1,70 +1,132 @@
-# Getting Started with Create React App
+# Power Market Simulation
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Overview
 
-## Available Scripts
+This project aims to simulate the dynamics of power markets, with a focus on demonstrating how financial products impact market liquidity, efficiency, and stability. It provides an interactive web-based interface where users can adjust key parameters and observe their effects on various market metrics.
 
-In the project directory, you can run:
+## Current Functionality
 
-### `npm start`
+- Interactive sliders for adjusting:
+  - Financial Trading Level
+  - Renewable Energy Penetration
+  - Demand Volatility
+- Visualizations:
+  - Price and Liquidity chart
+  - Volume and Renewable Generation chart
+- Market metrics display
+- Comparison feature to show low vs. high trading scenarios
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Key Concepts and Calculations
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### Financial Trading Level
+Represents the extent of financial product usage in the market. Higher levels are hypothesized to lead to improved liquidity and efficiency.
 
-### `npm test`
+### Renewable Penetration
+Indicates the proportion of energy generated from renewable sources. Higher penetration may introduce more variability into the supply side.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Demand Volatility
+Reflects the variability in energy demand, which can increase price fluctuations and market uncertainty.
 
-### `npm run build`
+### Price Calculation
+```
+supplyDemandPrice = basePrice * (demand / (baseDemand + renewableGeneration))
+tradingImpact = (100 - financialTradingLevel) / 1000
+price = supplyDemandPrice * (1 - tradingImpact) + prevPrice * tradingImpact
+```
+This calculation attempts to model how financial trading might smooth price movements.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Volume Calculation
+```
+volume = baseDemand * (1 + financialTradingLevel / 100)
+```
+Assumes that higher financial trading levels increase overall market activity.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Bid-Ask Spread
+```
+spread = Math.max(0.1, 1 + (Math.random() * 2 - (financialTradingLevel / 25)))
+```
+A proxy for liquidity, with higher financial trading levels generally leading to tighter spreads.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Price Efficiency
+```
+priceEfficiency = 100 - (priceDiscoverySpeed / periods / basePrice * 100)
+```
+Attempts to measure how closely market prices track the theoretical supply-demand price.
 
-### `npm run eject`
+### Market Volatility
+```
+volatility = Math.sqrt(sum of squared price changes / number of periods)
+```
+Measures the degree of variation in price over time.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### Liquidity
+```
+liquidity = averageVolume / marketVolatility
+```
+A simplified measure assuming that higher volumes and lower volatility indicate better liquidity.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Hypothesis
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+The core hypothesis of this simulation is that increased use of financial products in power markets leads to:
+1. Improved liquidity (tighter bid-ask spreads, higher volumes)
+2. Greater price efficiency (prices more closely reflecting supply-demand fundamentals)
+3. Reduced volatility (smoother price movements)
+4. Better ability to integrate renewable energy sources
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+However, it's important to note that this is a simplified model and real-world markets are significantly more complex.
 
-## Learn More
+## Known Issues and TODOs
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+1. Efficiency Description Update: The text description of market efficiency doesn't always accurately reflect the calculated efficiency value.
+2. InfoPopover Display: The info popovers are currently displaying as question marks instead of the intended icon.
+3. Model Refinement: The current price and volume calculations are simplistic and could be refined to better reflect real-world dynamics.
+4. Additional Metrics: Consider adding more sophisticated metrics like the Herfindahl-Hirschman Index for market concentration.
+5. Validation: The model's outputs should be compared against real-world data to assess its accuracy and adjust as necessary.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Reflections
 
-### Code Splitting
+This simulation is a work in progress and represents an initial attempt to model complex market dynamics in a simplified, interactive format. While it provides a foundation for exploring the hypothesized effects of financial products in power markets, it's important to approach the results with caution.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+The current implementation has limitations in both its mathematical model and its user interface. 
 
-### Analyzing the Bundle Size
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+# Power Market Simulation
 
-### Making a Progressive Web App
+## Live Demo
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+You can interact with the current version of the Power Market Simulation here: [https://vinayk94.github.io/trading-liq-viz/](https://vinayk94.github.io/trading-liq-viz/)
 
-### Advanced Configuration
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+## How to Use
 
-### Deployment
+1. Visit the [live demo](https://vinayk94.github.io/trading-liq-viz/).
+2. Use the sliders to adjust the Financial Trading Level, Renewable Penetration, and Demand Volatility.
+3. Observe how these changes affect the Price & Liquidity chart, Volume & Renewable Generation chart, and the market metrics displayed below.
+4. Click the "Show Comparison" button to see how different levels of financial trading impact the market.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+## Local Development
 
-### `npm run build` fails to minify
+If you want to run this project locally or contribute to its development:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+1. Clone the repository:
+   ```
+   git clone https://vinayk94.github.io/trading-liq-viz/.git
+   ```
+2. Navigate to the project directory:
+   ```
+   cd trading-liq-viz
+   ```
+3. Install dependencies:
+   ```
+   npm install
+   ```
+4. Start the development server:
+   ```
+   npm start
+   ```
+5. Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+
+## Feedback and Contributions
+
+I welcome feedback, bug reports, and contributions. Please feel free to open an issue or submit a pull request on the [GitHub repository](https://vinayk94.github.io/trading-liq-viz/).
+
