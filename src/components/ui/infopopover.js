@@ -1,52 +1,6 @@
-// src/components/ui/card.js
 import React,  { useState }  from 'react';
 //import { Popover, PopoverTrigger, PopoverContent } from './components/ui/popover';
 import { HelpCircle } from 'lucide-react';
-
-
-export const Card = ({ children, className }) => (
-    <div className={`shadow-lg rounded-lg p-4 bg-white ${className}`}>{children}</div>
-  );
-  
-  export const CardHeader = ({ children }) => (
-    <div className="border-b pb-2 mb-4">
-      {children}
-    </div>
-  );
-  
-  export const CardContent = ({ children }) => (
-    <div>
-      {children}
-    </div>
-  );
-
-export const Slider = ({ min, max, value, onChange, className }) => (
-    <input
-      type="range"
-      min={min}
-      max={max}
-      value={value}
-      onChange={onChange}
-      className={`slider ${className}`}
-    />
-);
-
-// Add the other components here
-export const Button = ({ children, onClick }) => (
-  <button className="btn" onClick={onClick}>
-    {children}
-  </button>
-);
-
-export const Tabs = ({ children }) => <div className="tabs">{children}</div>;
-export const TabsList = ({ children }) => <div className="tabs-list">{children}</div>;
-export const TabsTrigger = ({ children, onClick }) => (
-  <button className="tabs-trigger" onClick={onClick}>
-    {children}
-  </button>
-);
-export const TabsContent = ({ children }) => <div className="tabs-content">{children}</div>;
-
 
 
 // PopoverTrigger component
@@ -90,13 +44,11 @@ export const Popover = ({ children }) => {
 };
 
 
-export const InfoPopover = ({ title, content }) => (
+const InfoPopover = ({ title, content }) => (
   <Popover>
     <PopoverTrigger>
-    {/* Use a simple text character to test */}
-    <span className="inline-block ml-2 w-4 h-4 text-gray-500 cursor-help">?</span>
+      <HelpCircle className="inline-block ml-2 w-4 h-4 text-gray-500 cursor-help" />
     </PopoverTrigger>
-
     <PopoverContent>
       <h4 className="font-bold mb-2">{title}</h4>
       <p className="text-sm">{content}</p>
@@ -105,4 +57,3 @@ export const InfoPopover = ({ title, content }) => (
 );
 
 //export default InfoPopover;
-
