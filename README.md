@@ -2,7 +2,16 @@
 
 ## Overview
 
-This project aims to simulate the dynamics of power markets, with a focus on demonstrating how financial products impact market liquidity, efficiency, and stability. It provides an interactive web-based interface where users can adjust key parameters and observe their effects on various market metrics.
+This project aims to simulate the dynamics of power markets, with a focus on demonstrating how financial products impact market liquidity, efficiency, and stability. It provides an interactive web-based interface where users can adjust key parameters and observe their effects on various market metrics. 
+
+You can interact with the current version of the Power Market Simulation here: [https://vinayk94.github.io/trading-liq-viz/](https://vinayk94.github.io/trading-liq-viz/)
+
+## How to Use
+
+1. Visit the [live demo](https://vinayk94.github.io/trading-liq-viz/).
+2. Use the sliders to adjust the Financial Trading Level, Renewable Penetration, and Demand Volatility.
+3. Observe how these changes affect the Price & Liquidity chart, Volume & Renewable Generation chart, and the market metrics displayed below.
+4. Click the "Show Comparison" button to see how different levels of financial trading impact the market.
 
 ## Current Functionality
 
@@ -89,20 +98,6 @@ This simulation is a work in progress and represents an initial attempt to model
 
 The current implementation has limitations in both its mathematical model and its user interface. 
 
-
-# Power Market Simulation
-
-## Live Demo
-
-You can interact with the current version of the Power Market Simulation here: [https://vinayk94.github.io/trading-liq-viz/](https://vinayk94.github.io/trading-liq-viz/)
-
-
-## How to Use
-
-1. Visit the [live demo](https://vinayk94.github.io/trading-liq-viz/).
-2. Use the sliders to adjust the Financial Trading Level, Renewable Penetration, and Demand Volatility.
-3. Observe how these changes affect the Price & Liquidity chart, Volume & Renewable Generation chart, and the market metrics displayed below.
-4. Click the "Show Comparison" button to see how different levels of financial trading impact the market.
 
 ## Local Development
 
